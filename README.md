@@ -1,4 +1,4 @@
-# starter
+# greatalmuni
 
 A new Flutter project.
 
