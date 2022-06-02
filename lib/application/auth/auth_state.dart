@@ -11,3 +11,10 @@ class AuthStateLoggedIn extends AuthState {
 class AuthStateLoading extends AuthState {}
 
 class AuthStateLoggedOut extends AuthState {}
+
+class AuthStateError extends AuthState {
+  String message;
+  AuthStateError({
+    required this.message,
+  });
+}

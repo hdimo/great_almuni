@@ -25,7 +25,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tabeal de bord'),
+        title: const Text('Tableau de bord'),
         actions: [
           IconButton(
               onPressed: () {

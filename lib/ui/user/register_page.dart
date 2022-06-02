@@ -1,13 +1,20 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class RegisterPage extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:greatalmuni/application/auth/auth_state.dart';
+import 'package:greatalmuni/application/user/user_state.dart';
+import 'package:greatalmuni/providers.dart';
+import 'package:image_picker/image_picker.dart';
+
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends ConsumerState<RegisterPage> {
   TextEditingController? nameTextController;
   TextEditingController? emailTextController;
   TextEditingController? passwordTextController;
@@ -15,6 +22,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController? yearTextController;
   TextEditingController? specialityTextController;
   TextEditingController? hobbiesTextController;
+
+  File? _userAvatar;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -45,28 +54,55 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(userNotifierProvider, ((previous, next) {
+      if (next is UserStateError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.message)),
+        );
+      }
+
+      if (next is UserStateConnected) {
+        Navigator.of(context).pop();
+      }
+    }));
     return Scaffold(
+      appBar: AppBar(title: Text('Inscription')),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
         child: Form(
           key: _formKey,
           child: Center(
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  ElevatedButton(
+                      onPressed: () async {
+                        final file = await ImagePicker.platform.pickImage(
+                          source: ImageSource.gallery,
+                        );
+                        setState(() {
+                          print(file?.path);
+                          _userAvatar = File(file!.path);
+                        });
+                      },
+                      child: const Text('choisir une image')),
+                  const SizedBox(height: 10),
                   TextFormField(
+                    validator: _validateInputNoEmpty,
                     controller: nameTextController,
                     decoration:
                         const InputDecoration(labelText: 'Nom et prénom'),
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
+                    validator: _validateInputNoEmpty,
                     controller: emailTextController,
                     decoration:
                         const InputDecoration(labelText: 'Address mail'),
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
+                    validator: _validateInputNoEmpty,
                     controller: passwordTextController,
                     obscureText: true,
                     decoration:
@@ -74,12 +110,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
+                    validator: _validateInputNoEmpty,
                     controller: departmentTextController,
                     decoration: const InputDecoration(
                         labelText: 'Le département d’habitation'),
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
+                    validator: _validateInputNoEmpty,
                     controller: yearTextController,
                     decoration: const InputDecoration(
                         labelText: 'l’année de promotion'),
@@ -87,33 +125,39 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
+                    validator: _validateInputNoEmpty,
                     controller: specialityTextController,
                     decoration: const InputDecoration(labelText: 'Spécialité'),
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
+                    validator: _validateInputNoEmpty,
                     controller: hobbiesTextController,
                     decoration: const InputDecoration(
                         labelText: 'Les hobbies, passions'),
                     maxLines: 3,
                   ),
-                  ElevatedButton.icon(
-                    label: const Text(''),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        registerNewUser(
-                          nameTextController?.text,
-                          emailTextController?.text,
-                          passwordTextController?.text,
-                          departmentTextController?.text,
-                          yearTextController?.text,
-                          specialityTextController?.text,
-                          hobbiesTextController?.text,
-                        );
-                      }
-                    },
-                    icon: const Icon(Icons.check),
-                  )
+                  if (ref.watch(userNotifierProvider) is UserStateLoading)
+                    const CircularProgressIndicator()
+                  else
+                    ElevatedButton.icon(
+                      label: const Text(''),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          registerNewUser(
+                            nameTextController!.text,
+                            emailTextController!.text,
+                            passwordTextController!.text,
+                            departmentTextController!.text,
+                            yearTextController!.text,
+                            specialityTextController!.text,
+                            hobbiesTextController!.text,
+                            _userAvatar,
+                          );
+                        }
+                      },
+                      icon: const Icon(Icons.check),
+                    )
                 ],
               ),
             ),
@@ -124,12 +168,29 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void registerNewUser(
-    String? text,
-    String? text2,
-    String? text3,
-    String? text4,
-    String? text5,
-    String? text6,
-    String? text7,
-  ) {}
+    String fullname,
+    String email,
+    String password,
+    String departement,
+    String year,
+    String speciality,
+    String hobies,
+    File? avatare,
+  ) {
+    ref.read(userNotifierProvider.notifier).registerNewUser(
+          fullname,
+          email,
+          password,
+          speciality,
+          departement,
+          hobies,
+          avatare,
+        );
+  }
+
+  String? _validateInputNoEmpty(String? v) {
+    if (v == null || v.isEmpty) {
+      return 'le champ doit pas etre vide';
+    }
+  }
 }
