@@ -61,7 +61,7 @@ class _MessageUserPageState extends ConsumerState<MessageUserPage> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton.icon(
-                      label: const Text(''),
+                      label: const Text('envoyer'),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {}
                       },
