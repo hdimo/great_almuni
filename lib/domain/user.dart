@@ -1,24 +1,46 @@
 import 'dart:convert';
 
 class User {
-  String email;
-  String password;
   String uid;
+  String name;
+  String email;
+  String departement;
+  String year;
+  String speciality;
+  String hobies;
+  String img;
+
   User({
     required this.email,
-    required this.password,
     required this.uid,
+    required this.name,
+    required this.departement,
+    required this.year,
+    required this.speciality,
+    required this.hobies,
+    required this.img,
   });
 
   User copyWith({
     String? email,
     String? password,
     String? uid,
+    String? name,
+    String? departement,
+    String? year,
+    String? speciality,
+    String? hobies,
+    String? img,
   }) {
     return User(
       email: email ?? this.email,
-      password: password ?? this.password,
       uid: uid ?? this.uid,
+      name: name ?? this.name,
+      departement: departement ?? this.departement,
+      year: year ?? this.year,
+      speciality: speciality ?? this.speciality,
+      hobies: hobies ?? this.hobies,
+      img: img ?? this.img,
     );
   }
 
@@ -26,8 +48,13 @@ class User {
     final result = <String, dynamic>{};
 
     result.addAll({'email': email});
-    result.addAll({'password': password});
     result.addAll({'uid': uid});
+    result.addAll({'name': name});
+    result.addAll({'departement': departement});
+    result.addAll({'year': year});
+    result.addAll({'speciality': speciality});
+    result.addAll({'hobies': hobies});
+    result.addAll({'img': img});
 
     return result;
   }
@@ -35,8 +62,13 @@ class User {
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       email: map['email'],
-      password: map['password'],
       uid: map['uid'],
+      name: map['name'],
+      departement: map['departement'],
+      year: map['year'],
+      speciality: map['speciality'],
+      hobies: map['hobies'],
+      img: map['img'],
     );
   }
 
@@ -45,7 +77,7 @@ class User {
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
 
   @override
-  String toString() => 'User(email: $email, password: $password, uid: $uid)';
+  String toString() => 'User(email: $email, uid: $uid, name: $name)';
 
   @override
   bool operator ==(Object other) {
@@ -53,10 +85,15 @@ class User {
 
     return other is User &&
         other.email == email &&
-        other.password == password &&
-        other.uid == uid;
+        other.name == name &&
+        other.uid == uid &&
+        other.departement == departement &&
+        other.year == year &&
+        other.speciality == speciality &&
+        other.img == img &&
+        other.hobies == hobies;
   }
 
   @override
-  int get hashCode => email.hashCode ^ password.hashCode ^ uid.hashCode;
+  int get hashCode => email.hashCode ^ name.hashCode ^ uid.hashCode;
 }

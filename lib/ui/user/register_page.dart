@@ -184,6 +184,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
           speciality,
           departement,
           hobies,
+          year,
           avatare,
         );
   }

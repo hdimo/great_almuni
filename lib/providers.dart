@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:greatalmuni/application/annuaire/annuaire_notifier.dart';
+import 'package:greatalmuni/application/annuaire/annuaire_state.dart';
 import 'package:greatalmuni/application/auth/auth_notifier.dart';
 import 'package:greatalmuni/application/auth/auth_state.dart';
 import 'package:greatalmuni/application/user/user_notifier.dart';
@@ -24,4 +26,9 @@ final userNotifierProvider =
     userRepo: ref.watch(userRepositoryProvider),
     imgUploader: ref.watch(imageUploaderProvider),
   );
+});
+
+final annuaireProvider =
+    StateNotifierProvider<AnnuaireNotifier, AnnuaireState>((ref) {
+  return AnnuaireNotifier(ref.watch(userRepositoryProvider));
 });

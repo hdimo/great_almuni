@@ -9,9 +9,10 @@ class ImageUploader {
     storage =
         FirebaseStorage.instanceFor(bucket: 'gs://greatalmuni.appspot.com');
   }
-
   Future<String> upload(File file, String userId) async {
-    var storageRef = storage.ref().child('user/profile/$userId');
+    var ext = file.path.split('.').last;
+
+    var storageRef = storage.ref().child('user/profile/$userId.' + ext);
     try {
       UploadTask uploadTask = storageRef.putFile(file);
       return await storageRef.getDownloadURL();

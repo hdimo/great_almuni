@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greatalmuni/application/user/user_state.dart';
+import 'package:greatalmuni/domain/user.dart';
 import 'package:greatalmuni/infrastructure/img_uploader.dart';
 import 'package:greatalmuni/infrastructure/user/user_repo.dart';
+
+import 'package:greatalmuni/domain/user.dart' as app;
 
 class UserNotifier extends StateNotifier<UserState> {
   UserRepo userRepo;
@@ -22,16 +25,27 @@ class UserNotifier extends StateNotifier<UserState> {
     String speciality,
     String departement,
     String hobies,
-    File? avatage,
+    String year,
+    File? img,
   ) async {
     state = UserStateLoading();
     try {
-      final user = await userRepo.createUser(email, password);
-      if (avatage != null) {
-        final url = await imgUploader.upload(avatage, user!.uid);
-        await user.updatePhotoURL(url);
-        state = UserStateConnected();
+      if (img == null) {
+        state = UserStateError("l image obligatoire");
+        return;
       }
+      final user = await userRepo.createUser(
+        email: email,
+        name: fullname,
+        password: password,
+        speciality: speciality,
+        departement: departement,
+        year: year,
+        hobies: hobies,
+        img: img,
+      );
+
+      state = UserStateConnected();
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'email-already-in-use':
