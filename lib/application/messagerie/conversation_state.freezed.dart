@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'message_state.dart';
+part of 'conversation_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MessageState {
+mixin _$ConversationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() sent,
+    required TResult Function(List<Conversation> conversations) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$MessageState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,32 +36,32 @@ mixin _$MessageState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
+    required TResult Function(Init value) init,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Sent value) sent,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -69,51 +69,52 @@ mixin _$MessageState {
 }
 
 /// @nodoc
-abstract class $MessageStateCopyWith<$Res> {
-  factory $MessageStateCopyWith(
-          MessageState value, $Res Function(MessageState) then) =
-      _$MessageStateCopyWithImpl<$Res>;
+abstract class $ConversationStateCopyWith<$Res> {
+  factory $ConversationStateCopyWith(
+          ConversationState value, $Res Function(ConversationState) then) =
+      _$ConversationStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$MessageStateCopyWithImpl<$Res> implements $MessageStateCopyWith<$Res> {
-  _$MessageStateCopyWithImpl(this._value, this._then);
+class _$ConversationStateCopyWithImpl<$Res>
+    implements $ConversationStateCopyWith<$Res> {
+  _$ConversationStateCopyWithImpl(this._value, this._then);
 
-  final MessageState _value;
+  final ConversationState _value;
   // ignore: unused_field
-  final $Res Function(MessageState) _then;
+  final $Res Function(ConversationState) _then;
 }
 
 /// @nodoc
-abstract class _$$_InitCopyWith<$Res> {
-  factory _$$_InitCopyWith(_$_Init value, $Res Function(_$_Init) then) =
-      __$$_InitCopyWithImpl<$Res>;
+abstract class _$$InitCopyWith<$Res> {
+  factory _$$InitCopyWith(_$Init value, $Res Function(_$Init) then) =
+      __$$InitCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitCopyWithImpl<$Res> extends _$MessageStateCopyWithImpl<$Res>
-    implements _$$_InitCopyWith<$Res> {
-  __$$_InitCopyWithImpl(_$_Init _value, $Res Function(_$_Init) _then)
-      : super(_value, (v) => _then(v as _$_Init));
+class __$$InitCopyWithImpl<$Res> extends _$ConversationStateCopyWithImpl<$Res>
+    implements _$$InitCopyWith<$Res> {
+  __$$InitCopyWithImpl(_$Init _value, $Res Function(_$Init) _then)
+      : super(_value, (v) => _then(v as _$Init));
 
   @override
-  _$_Init get _value => super._value as _$_Init;
+  _$Init get _value => super._value as _$Init;
 }
 
 /// @nodoc
 
-class _$_Init implements _Init {
-  const _$_Init();
+class _$Init implements Init {
+  const _$Init();
 
   @override
   String toString() {
-    return 'MessageState.init()';
+    return 'ConversationState.init()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Init);
+        (other.runtimeType == runtimeType && other is _$Init);
   }
 
   @override
@@ -124,7 +125,7 @@ class _$_Init implements _Init {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() sent,
+    required TResult Function(List<Conversation> conversations) loaded,
     required TResult Function(String message) error,
   }) {
     return init();
@@ -135,7 +136,7 @@ class _$_Init implements _Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
   }) {
     return init?.call();
@@ -146,7 +147,7 @@ class _$_Init implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -159,9 +160,9 @@ class _$_Init implements _Init {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
+    required TResult Function(Init value) init,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Sent value) sent,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
     return init(this);
@@ -170,9 +171,9 @@ class _$_Init implements _Init {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
   }) {
     return init?.call(this);
@@ -181,9 +182,9 @@ class _$_Init implements _Init {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -194,8 +195,8 @@ class _$_Init implements _Init {
   }
 }
 
-abstract class _Init implements MessageState {
-  const factory _Init() = _$_Init;
+abstract class Init implements ConversationState {
+  const factory Init() = _$Init;
 }
 
 /// @nodoc
@@ -206,7 +207,8 @@ abstract class _$$_LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res> extends _$MessageStateCopyWithImpl<$Res>
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$ConversationStateCopyWithImpl<$Res>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, (v) => _then(v as _$_Loading));
@@ -222,7 +224,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'MessageState.loading()';
+    return 'ConversationState.loading()';
   }
 
   @override
@@ -239,7 +241,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() sent,
+    required TResult Function(List<Conversation> conversations) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -250,7 +252,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -261,7 +263,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -274,9 +276,9 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
+    required TResult Function(Init value) init,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Sent value) sent,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -285,9 +287,9 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -296,9 +298,9 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -309,54 +311,85 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements MessageState {
+abstract class _Loading implements ConversationState {
   const factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
-abstract class _$$_SentCopyWith<$Res> {
-  factory _$$_SentCopyWith(_$_Sent value, $Res Function(_$_Sent) then) =
-      __$$_SentCopyWithImpl<$Res>;
+abstract class _$$_LoadedCopyWith<$Res> {
+  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
+      __$$_LoadedCopyWithImpl<$Res>;
+  $Res call({List<Conversation> conversations});
 }
 
 /// @nodoc
-class __$$_SentCopyWithImpl<$Res> extends _$MessageStateCopyWithImpl<$Res>
-    implements _$$_SentCopyWith<$Res> {
-  __$$_SentCopyWithImpl(_$_Sent _value, $Res Function(_$_Sent) _then)
-      : super(_value, (v) => _then(v as _$_Sent));
+class __$$_LoadedCopyWithImpl<$Res>
+    extends _$ConversationStateCopyWithImpl<$Res>
+    implements _$$_LoadedCopyWith<$Res> {
+  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
+      : super(_value, (v) => _then(v as _$_Loaded));
 
   @override
-  _$_Sent get _value => super._value as _$_Sent;
+  _$_Loaded get _value => super._value as _$_Loaded;
+
+  @override
+  $Res call({
+    Object? conversations = freezed,
+  }) {
+    return _then(_$_Loaded(
+      conversations: conversations == freezed
+          ? _value._conversations
+          : conversations // ignore: cast_nullable_to_non_nullable
+              as List<Conversation>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_Sent implements _Sent {
-  const _$_Sent();
+class _$_Loaded implements _Loaded {
+  const _$_Loaded({required final List<Conversation> conversations})
+      : _conversations = conversations;
+
+  final List<Conversation> _conversations;
+  @override
+  List<Conversation> get conversations {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_conversations);
+  }
 
   @override
   String toString() {
-    return 'MessageState.sent()';
+    return 'ConversationState.loaded(conversations: $conversations)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Sent);
+        (other.runtimeType == runtimeType &&
+            other is _$_Loaded &&
+            const DeepCollectionEquality()
+                .equals(other._conversations, _conversations));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_conversations));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
+      __$$_LoadedCopyWithImpl<_$_Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() sent,
+    required TResult Function(List<Conversation> conversations) loaded,
     required TResult Function(String message) error,
   }) {
-    return sent();
+    return loaded(conversations);
   }
 
   @override
@@ -364,10 +397,10 @@ class _$_Sent implements _Sent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
   }) {
-    return sent?.call();
+    return loaded?.call(conversations);
   }
 
   @override
@@ -375,12 +408,12 @@ class _$_Sent implements _Sent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
-    if (sent != null) {
-      return sent();
+    if (loaded != null) {
+      return loaded(conversations);
     }
     return orElse();
   }
@@ -388,43 +421,49 @@ class _$_Sent implements _Sent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
+    required TResult Function(Init value) init,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Sent value) sent,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
-    return sent(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
   }) {
-    return sent?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (sent != null) {
-      return sent(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class _Sent implements MessageState {
-  const factory _Sent() = _$_Sent;
+abstract class _Loaded implements ConversationState {
+  const factory _Loaded({required final List<Conversation> conversations}) =
+      _$_Loaded;
+
+  List<Conversation> get conversations => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -435,7 +474,7 @@ abstract class _$$_ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res> extends _$MessageStateCopyWithImpl<$Res>
+class __$$_ErrorCopyWithImpl<$Res> extends _$ConversationStateCopyWithImpl<$Res>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, (v) => _then(v as _$_Error));
@@ -448,7 +487,7 @@ class __$$_ErrorCopyWithImpl<$Res> extends _$MessageStateCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(_$_Error(
-      message: message == freezed
+      message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -459,14 +498,14 @@ class __$$_ErrorCopyWithImpl<$Res> extends _$MessageStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error implements _Error {
-  const _$_Error({required this.message});
+  const _$_Error(this.message);
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'MessageState.error(message: $message)';
+    return 'ConversationState.error(message: $message)';
   }
 
   @override
@@ -491,7 +530,7 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() sent,
+    required TResult Function(List<Conversation> conversations) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -502,7 +541,7 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -513,7 +552,7 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? sent,
+    TResult Function(List<Conversation> conversations)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -526,9 +565,9 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
+    required TResult Function(Init value) init,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Sent value) sent,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -537,9 +576,9 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -548,9 +587,9 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
+    TResult Function(Init value)? init,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Sent value)? sent,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -561,8 +600,8 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements MessageState {
-  const factory _Error({required final String message}) = _$_Error;
+abstract class _Error implements ConversationState {
+  const factory _Error(final String message) = _$_Error;
 
   String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
