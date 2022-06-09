@@ -16,18 +16,19 @@ class UserInfoPage extends StatelessWidget {
           children: [
             SizedBox(
               height: 250,
-              child: Image.network(user.img),
+              child:
+                  user.img == null ? CircleAvatar() : Image.network(user.img!),
             ),
             const Divider(),
             Text(user.email),
             const Divider(),
-            Text(user.speciality),
+            Text(user.speciality!),
             const Divider(),
-            Text(user.departement),
+            Text(user.departement!),
             const Divider(),
-            Text(user.year),
+            Text(user.year!),
             const Divider(),
-            Text(user.hobies),
+            Text(user.hobies!),
             const Divider(),
             ElevatedButton.icon(
               onPressed: () {

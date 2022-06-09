@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greatalmuni/application/auth/auth_state.dart';
+import 'package:greatalmuni/domain/user.dart' as app_user;
 import 'package:greatalmuni/infrastructure/user/user_repo.dart';
 
 class AuthNotifier extends StateNotifier<AuthState> {
@@ -10,10 +11,15 @@ class AuthNotifier extends StateNotifier<AuthState> {
   void login(String email, String password) async {
     state = AuthStateLoading();
     try {
-      final user = await userRepo.loginWithEmailAndPassword(email, password);
+      final loggedInUser =
+          await userRepo.loginWithEmailAndPassword(email, password);
 
-      if (user != null) {
-        state = AuthStateLoggedIn(user);
+      if (loggedInUser != null) {
+        state = AuthStateLoggedIn(app_user.User(
+            email: loggedInUser.email!,
+            name: loggedInUser.displayName ?? loggedInUser.email!,
+            uid: loggedInUser.uid,
+            img: loggedInUser.photoURL));
       } else {
         state = AuthStateError(message: 'login erreur');
       }

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greatalmuni/application/messagerie/message_state.dart';
 import 'package:greatalmuni/domain/message.dart';
+import 'package:greatalmuni/domain/user.dart';
 import 'package:greatalmuni/infrastructure/messagerie/message_repo.dart';
 
 class MessageNotifier extends StateNotifier<MessageState> {
@@ -13,8 +14,8 @@ class MessageNotifier extends StateNotifier<MessageState> {
   }
 
   void startConversationWithUser(
-    String fromUser,
-    String toUser,
+    User fromUser,
+    User toUser,
     String initMessage,
   ) async {
     state = const MessageState.loading();
@@ -25,8 +26,8 @@ class MessageNotifier extends StateNotifier<MessageState> {
       messageRepo.addMessageToConversation(
         conversation,
         Message(
-          fromUser: fromUser,
-          toUser: toUser,
+          fromUser: fromUser.name,
+          toUser: toUser.name,
           content: initMessage,
           createdOn: DateTime.now(),
         ),

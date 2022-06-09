@@ -15,6 +15,7 @@ class ConversationNotifier extends StateNotifier<ConversationState> {
       state = ConversationState.loaded(conversations: conversations);
     } catch (e) {
       state = ConversationState.error(e.toString());
+      rethrow;
     }
   }
 }

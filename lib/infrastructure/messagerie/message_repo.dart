@@ -12,7 +12,12 @@ class MessageRepo {
         .get()
         .then((event) {
       for (var doc in event.docs) {
-        listMessages.add(Conversation.fromJson(doc.data()));
+        print('🅰️');
+        var data = doc.data();
+        data['uid'] = doc.id;
+
+        //TODO: should convert fromUser / toUserid => User before
+        listMessages.add(Conversation.fromJson(data));
       }
     });
     await FirebaseFirestore.instance
@@ -21,14 +26,18 @@ class MessageRepo {
         .get()
         .then((event) {
       for (var doc in event.docs) {
-        listMessages.add(Conversation.fromJson(doc.data()));
+        var data = doc.data();
+        data['uid'] = doc.id;
+        listMessages.add(Conversation.fromJson(data));
       }
     });
     return listMessages;
   }
 
   Future<Conversation> getConversationForUsersOrStart(
-      String fromUser, String toUser) async {
+    User fromUser,
+    User toUser,
+  ) async {
     Conversation? conversation;
     final conversationRef =
         FirebaseFirestore.instance.collection('conversation');
@@ -47,7 +56,12 @@ class MessageRepo {
     return conversation ?? await startConversation(fromUser, toUser);
   }
 
-  Future<Conversation> startConversation(String fromUser, String toUser) async {
+  Future<Conversation> startConversation(User fromUser, User toUser) async {
+    // FirebaseFirestore.instance
+    //     .doc('/users/' + fromUser)
+    //     .get()
+    //     .then((value) => null);
+
     final conversation = Conversation(
       fromUserId: fromUser,
       toUserId: toUser,
@@ -61,7 +75,10 @@ class MessageRepo {
     return conversation;
   }
 
-  addMessageToConversation(Conversation conversation, Message message) async {
+  Future<void> addMessageToConversation(
+    Conversation conversation,
+    Message message,
+  ) async {
     await FirebaseFirestore.instance
         .collection('conversation')
         .doc(conversation.uid)

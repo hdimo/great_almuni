@@ -17,7 +17,6 @@ class _MessagerieHomePageState extends ConsumerState<MessagerieHomePage> {
   @override
   Widget build(BuildContext context) {
     final user = (ref.watch(authProvider) as AuthStateLoggedIn).user;
-
     return ref.watch(conversationStateProvider).when(
           init: () {
             return Center(
@@ -35,8 +34,10 @@ class _MessagerieHomePageState extends ConsumerState<MessagerieHomePage> {
             return ListView.builder(
               itemCount: conversations.length,
               itemBuilder: (context, index) {
+                final _title =
+                    "${conversations[index].fromUserId.name} <=> ${conversations[index].toUserId.name}";
                 return ListTile(
-                  title: Text(conversations[index].fromUserId),
+                  title: Text(_title),
                 );
               },
             );

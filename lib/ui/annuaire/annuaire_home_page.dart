@@ -34,7 +34,9 @@ class AnnuaireHomePage extends ConsumerWidget {
                           title: Text(users[index].name),
                           subtitle: Text(users[index].email),
                           leading: CircleAvatar(
-                            child: Image.network(users[index].img),
+                            child: users[index].img == null
+                                ? CircleAvatar()
+                                : Image.network(users[index].img!),
                           ),
                           trailing: Icon(Icons.arrow_right),
                         );

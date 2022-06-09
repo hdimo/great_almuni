@@ -6,7 +6,6 @@ import 'package:greatalmuni/providers.dart';
 import 'package:greatalmuni/ui/auth/login_page.dart';
 import 'package:greatalmuni/ui/core/input_theme.dart';
 import 'package:greatalmuni/ui/main_page.dart';
-import 'package:greatalmuni/ui/user/register_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -14,20 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Conversation _$ConversationFromJson(Map<String, dynamic> json) {
-  return _Conversation.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Conversation {
   String? get uid => throw _privateConstructorUsedError;
-  String get fromUserId => throw _privateConstructorUsedError;
-  String get toUserId => throw _privateConstructorUsedError;
+  User get fromUserId => throw _privateConstructorUsedError;
+  User get toUserId => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get createdOn => throw _privateConstructorUsedError;
   List<Message>? get messages => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ConversationCopyWith<Conversation> get copyWith =>
       throw _privateConstructorUsedError;
@@ -40,10 +35,13 @@ abstract class $ConversationCopyWith<$Res> {
       _$ConversationCopyWithImpl<$Res>;
   $Res call(
       {String? uid,
-      String fromUserId,
-      String toUserId,
+      User fromUserId,
+      User toUserId,
       @TimestampConverter() DateTime createdOn,
       List<Message>? messages});
+
+  $UserCopyWith<$Res> get fromUserId;
+  $UserCopyWith<$Res> get toUserId;
 }
 
 /// @nodoc
@@ -70,11 +68,11 @@ class _$ConversationCopyWithImpl<$Res> implements $ConversationCopyWith<$Res> {
       fromUserId: fromUserId == freezed
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as User,
       toUserId: toUserId == freezed
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as User,
       createdOn: createdOn == freezed
           ? _value.createdOn
           : createdOn // ignore: cast_nullable_to_non_nullable
@@ -84,6 +82,20 @@ class _$ConversationCopyWithImpl<$Res> implements $ConversationCopyWith<$Res> {
           : messages // ignore: cast_nullable_to_non_nullable
               as List<Message>?,
     ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get fromUserId {
+    return $UserCopyWith<$Res>(_value.fromUserId, (value) {
+      return _then(_value.copyWith(fromUserId: value));
+    });
+  }
+
+  @override
+  $UserCopyWith<$Res> get toUserId {
+    return $UserCopyWith<$Res>(_value.toUserId, (value) {
+      return _then(_value.copyWith(toUserId: value));
+    });
   }
 }
 
@@ -96,10 +108,15 @@ abstract class _$$_ConversationCopyWith<$Res>
   @override
   $Res call(
       {String? uid,
-      String fromUserId,
-      String toUserId,
+      User fromUserId,
+      User toUserId,
       @TimestampConverter() DateTime createdOn,
       List<Message>? messages});
+
+  @override
+  $UserCopyWith<$Res> get fromUserId;
+  @override
+  $UserCopyWith<$Res> get toUserId;
 }
 
 /// @nodoc
@@ -129,11 +146,11 @@ class __$$_ConversationCopyWithImpl<$Res>
       fromUserId: fromUserId == freezed
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as User,
       toUserId: toUserId == freezed
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as User,
       createdOn: createdOn == freezed
           ? _value.createdOn
           : createdOn // ignore: cast_nullable_to_non_nullable
@@ -147,7 +164,7 @@ class __$$_ConversationCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_Conversation implements _Conversation {
   const _$_Conversation(
       {this.uid,
@@ -157,15 +174,12 @@ class _$_Conversation implements _Conversation {
       final List<Message>? messages})
       : _messages = messages;
 
-  factory _$_Conversation.fromJson(Map<String, dynamic> json) =>
-      _$$_ConversationFromJson(json);
-
   @override
   final String? uid;
   @override
-  final String fromUserId;
+  final User fromUserId;
   @override
-  final String toUserId;
+  final User toUserId;
   @override
   @TimestampConverter()
   final DateTime createdOn;
@@ -196,7 +210,6 @@ class _$_Conversation implements _Conversation {
             const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -210,30 +223,22 @@ class _$_Conversation implements _Conversation {
   @override
   _$$_ConversationCopyWith<_$_Conversation> get copyWith =>
       __$$_ConversationCopyWithImpl<_$_Conversation>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ConversationToJson(this);
-  }
 }
 
 abstract class _Conversation implements Conversation {
   const factory _Conversation(
       {final String? uid,
-      required final String fromUserId,
-      required final String toUserId,
+      required final User fromUserId,
+      required final User toUserId,
       @TimestampConverter() required final DateTime createdOn,
       final List<Message>? messages}) = _$_Conversation;
-
-  factory _Conversation.fromJson(Map<String, dynamic> json) =
-      _$_Conversation.fromJson;
 
   @override
   String? get uid => throw _privateConstructorUsedError;
   @override
-  String get fromUserId => throw _privateConstructorUsedError;
+  User get fromUserId => throw _privateConstructorUsedError;
   @override
-  String get toUserId => throw _privateConstructorUsedError;
+  User get toUserId => throw _privateConstructorUsedError;
   @override
   @TimestampConverter()
   DateTime get createdOn => throw _privateConstructorUsedError;

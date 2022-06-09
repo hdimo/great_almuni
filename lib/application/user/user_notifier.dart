@@ -3,11 +3,8 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greatalmuni/application/user/user_state.dart';
-import 'package:greatalmuni/domain/user.dart';
 import 'package:greatalmuni/infrastructure/img_uploader.dart';
 import 'package:greatalmuni/infrastructure/user/user_repo.dart';
-
-import 'package:greatalmuni/domain/user.dart' as app;
 
 class UserNotifier extends StateNotifier<UserState> {
   UserRepo userRepo;
@@ -34,7 +31,7 @@ class UserNotifier extends StateNotifier<UserState> {
         state = UserStateError("l image obligatoire");
         return;
       }
-      final user = await userRepo.createUser(
+      await userRepo.createUser(
         email: email,
         name: fullname,
         password: password,

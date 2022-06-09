@@ -76,15 +76,14 @@ class _MessageUserPageState extends ConsumerState<MessageUserPage> {
                             label: const Text('envoyer'),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                final currentUid = (ref.watch(authProvider)
+                                final loggeduser = (ref.watch(authProvider)
                                         as AuthStateLoggedIn)
-                                    .user!
-                                    .uid;
+                                    .user!;
                                 ref
                                     .read(messageProvider.notifier)
                                     .startConversationWithUser(
-                                      currentUid,
-                                      widget.user.uid,
+                                      loggeduser,
+                                      widget.user,
                                       messageController!.text,
                                     );
                               }

@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:greatalmuni/domain/user.dart' as AppUser;
 import 'package:greatalmuni/infrastructure/img_uploader.dart';
+
+import 'package:rich_console/printRich.dart';
 
 class UserRepo {
   static String? getUserId() {
@@ -46,7 +47,7 @@ class UserRepo {
         await FirebaseFirestore.instance
             .collection('users')
             .doc(uid)
-            .set(user.toMap());
+            .set(user.toJson());
 
         return userCredential.user;
       } else {
@@ -80,14 +81,13 @@ class UserRepo {
   Future<List<AppUser.User>> readUsers(String path, int limit) async {
     final snapshot =
         await FirebaseFirestore.instance.collection(path).limit(limit).get();
-    print('🃏🃏');
+
     return snapshot.docs.map(
       (doc) {
         var data = doc.data();
         data['uid'] = doc.reference.id;
-        print('🃏');
-        print(data);
-        return AppUser.User.fromMap(data);
+        printRich(data);
+        return AppUser.User.fromJson(data);
       },
     ).toList();
   }
