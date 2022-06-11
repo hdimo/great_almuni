@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:greatalmuni/domain/conversation.dart';
 import 'package:greatalmuni/domain/message.dart';
 import 'package:greatalmuni/domain/user.dart';
@@ -35,16 +36,18 @@ class MessageRepo {
   }
 
   Future<Conversation> getConversationForUsersOrStart(
-    User fromUser,
-    User toUser,
+    String fromUserId,
+    String fromUserName,
+    String toUserId,
+    String toUserName,
   ) async {
     Conversation? conversation;
     final conversationRef =
         FirebaseFirestore.instance.collection('conversation');
 
     await conversationRef
-        .where('fromUserId', isEqualTo: fromUser)
-        .where('toUserId', isEqualTo: toUser)
+        .where('fromUserId', isEqualTo: fromUserId)
+        .where('toUserId', isEqualTo: toUserId)
         .get()
         .then((event) {
       if (event.docs.isNotEmpty) {
@@ -53,18 +56,31 @@ class MessageRepo {
         conversation = Conversation.fromJson(data);
       }
     });
-    return conversation ?? await startConversation(fromUser, toUser);
+    return conversation ??
+        await startConversation(
+          fromUserId,
+          fromUserName,
+          toUserId,
+          toUserName,
+        );
   }
 
-  Future<Conversation> startConversation(User fromUser, User toUser) async {
+  Future<Conversation> startConversation(
+    String fromUserId,
+    String fromUserName,
+    String toUserId,
+    String toUserName,
+  ) async {
     // FirebaseFirestore.instance
     //     .doc('/users/' + fromUser)
     //     .get()
     //     .then((value) => null);
 
     final conversation = Conversation(
-      fromUserId: fromUser,
-      toUserId: toUser,
+      fromUserId: fromUserId,
+      fromUserName: fromUserName,
+      toUserId: toUserId,
+      toUserName: toUserName,
       createdOn: DateTime.now(),
       messages: [],
     );
@@ -84,5 +100,13 @@ class MessageRepo {
         .doc(conversation.uid)
         .collection('messages')
         .add(message.toJson());
+  }
+
+  getMessages(conversationid) {
+    return FirebaseFirestore.instance
+        .collection('conversation')
+        .doc(conversationid)
+        .collection('messages')
+        .snapshots();
   }
 }

@@ -4,6 +4,7 @@ import 'package:greatalmuni/application/auth/auth_state.dart';
 import 'package:greatalmuni/application/messagerie/conversation_state.dart';
 import 'package:greatalmuni/domain/conversation.dart';
 import 'package:greatalmuni/providers.dart';
+import 'package:greatalmuni/ui/messagerie/chat_page.dart';
 
 class MessagerieHomePage extends ConsumerStatefulWidget {
   const MessagerieHomePage({Key? key}) : super(key: key);
@@ -35,9 +36,18 @@ class _MessagerieHomePageState extends ConsumerState<MessagerieHomePage> {
               itemCount: conversations.length,
               itemBuilder: (context, index) {
                 final _title =
-                    "${conversations[index].fromUserId.name} <=> ${conversations[index].toUserId.name}";
+                    "${conversations[index].fromUserName} <=> ${conversations[index].toUserName}";
                 return ListTile(
                   title: Text(_title),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ChatPage(
+                          conversation: conversations[index],
+                        ),
+                      ),
+                    );
+                  },
                 );
               },
             );

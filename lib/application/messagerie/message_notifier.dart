@@ -14,20 +14,26 @@ class MessageNotifier extends StateNotifier<MessageState> {
   }
 
   void startConversationWithUser(
-    User fromUser,
-    User toUser,
+    String fromUserId,
+    String fromUserName,
+    String toUserId,
+    String toUserName,
     String initMessage,
   ) async {
     state = const MessageState.loading();
     try {
-      final conversation =
-          await messageRepo.getConversationForUsersOrStart(fromUser, toUser);
+      final conversation = await messageRepo.getConversationForUsersOrStart(
+        fromUserId,
+        fromUserName,
+        toUserId,
+        toUserName,
+      );
 
       messageRepo.addMessageToConversation(
         conversation,
         Message(
-          fromUser: fromUser.name,
-          toUser: toUser.name,
+          fromUser: fromUserName,
+          toUser: toUserName,
           content: initMessage,
           createdOn: DateTime.now(),
         ),

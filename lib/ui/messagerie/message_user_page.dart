@@ -82,8 +82,10 @@ class _MessageUserPageState extends ConsumerState<MessageUserPage> {
                                 ref
                                     .read(messageProvider.notifier)
                                     .startConversationWithUser(
-                                      loggeduser,
-                                      widget.user,
+                                      loggeduser.uid,
+                                      loggeduser.name,
+                                      widget.user.uid,
+                                      widget.user.name,
                                       messageController!.text,
                                     );
                               }
