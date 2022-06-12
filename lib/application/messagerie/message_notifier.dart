@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greatalmuni/application/messagerie/message_state.dart';
+import 'package:greatalmuni/domain/conversation.dart';
 import 'package:greatalmuni/domain/message.dart';
 import 'package:greatalmuni/domain/user.dart';
 import 'package:greatalmuni/infrastructure/messagerie/message_repo.dart';
@@ -43,5 +44,15 @@ class MessageNotifier extends StateNotifier<MessageState> {
     } catch (e) {
       state = MessageState.error(message: e.toString());
     }
+  }
+
+  addMessageToConversation(
+      Conversation conversationId, String text, String userId) {
+    messageRepo.addMessageToConversation(
+        conversationId,
+        Message.now(
+          fromUser: userId,
+          content: text,
+        ));
   }
 }

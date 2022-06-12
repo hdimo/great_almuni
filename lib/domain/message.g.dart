@@ -8,7 +8,7 @@ part of 'message.dart';
 
 _$_Message _$$_MessageFromJson(Map<String, dynamic> json) => _$_Message(
       fromUser: json['fromUser'] as String,
-      toUser: json['toUser'] as String,
+      toUser: json['toUser'] as String?,
       content: json['content'] as String,
       createdOn: DateTime.parse(json['createdOn'] as String),
     );

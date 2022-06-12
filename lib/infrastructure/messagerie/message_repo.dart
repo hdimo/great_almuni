@@ -107,6 +107,7 @@ class MessageRepo {
         .collection('conversation')
         .doc(conversationid)
         .collection('messages')
+        .orderBy('createdOn')
         .snapshots();
   }
 }

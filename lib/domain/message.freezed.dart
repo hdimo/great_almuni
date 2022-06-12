@@ -21,7 +21,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Message {
   String get fromUser => throw _privateConstructorUsedError;
-  String get toUser => throw _privateConstructorUsedError;
+  String? get toUser => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   DateTime get createdOn => throw _privateConstructorUsedError;
 
@@ -35,7 +35,7 @@ abstract class $MessageCopyWith<$Res> {
   factory $MessageCopyWith(Message value, $Res Function(Message) then) =
       _$MessageCopyWithImpl<$Res>;
   $Res call(
-      {String fromUser, String toUser, String content, DateTime createdOn});
+      {String fromUser, String? toUser, String content, DateTime createdOn});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
       toUser: toUser == freezed
           ? _value.toUser
           : toUser // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       content: content == freezed
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$_MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
       __$$_MessageCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String fromUser, String toUser, String content, DateTime createdOn});
+      {String fromUser, String? toUser, String content, DateTime createdOn});
 }
 
 /// @nodoc
@@ -108,7 +108,7 @@ class __$$_MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res>
       toUser: toUser == freezed
           ? _value.toUser
           : toUser // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       content: content == freezed
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -126,7 +126,7 @@ class __$$_MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res>
 class _$_Message implements _Message {
   const _$_Message(
       {required this.fromUser,
-      required this.toUser,
+      this.toUser,
       required this.content,
       required this.createdOn});
 
@@ -136,7 +136,7 @@ class _$_Message implements _Message {
   @override
   final String fromUser;
   @override
-  final String toUser;
+  final String? toUser;
   @override
   final String content;
   @override
@@ -181,7 +181,7 @@ class _$_Message implements _Message {
 abstract class _Message implements Message {
   const factory _Message(
       {required final String fromUser,
-      required final String toUser,
+      final String? toUser,
       required final String content,
       required final DateTime createdOn}) = _$_Message;
 
@@ -190,7 +190,7 @@ abstract class _Message implements Message {
   @override
   String get fromUser => throw _privateConstructorUsedError;
   @override
-  String get toUser => throw _privateConstructorUsedError;
+  String? get toUser => throw _privateConstructorUsedError;
   @override
   String get content => throw _privateConstructorUsedError;
   @override

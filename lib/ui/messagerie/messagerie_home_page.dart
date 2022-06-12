@@ -18,6 +18,7 @@ class _MessagerieHomePageState extends ConsumerState<MessagerieHomePage> {
   @override
   Widget build(BuildContext context) {
     final user = (ref.watch(authProvider) as AuthStateLoggedIn).user;
+
     return ref.watch(conversationStateProvider).when(
           init: () {
             return Center(

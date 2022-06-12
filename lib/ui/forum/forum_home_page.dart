@@ -6,7 +6,16 @@ class ForumHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Forum'),
+      child: ListView.builder(
+        itemCount: 1,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text('apprendre a faire quelque chose'),
+            subtitle: Text('informatique'),
+            trailing: Icon(Icons.favorite),
+          );
+        },
+      ),
     );
   }
 }

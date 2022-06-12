@@ -21,6 +21,10 @@ final userRepositoryProvider = Provider<UserRepo>((ref) {
   return UserRepo();
 });
 
+final messageRepositoryProvider = Provider.autoDispose<MessageRepo>((ref) {
+  return MessageRepo();
+});
+
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   return AuthNotifier(ref.watch(userRepositoryProvider));
 });
@@ -36,8 +40,8 @@ final annuaireProvider = StateNotifierProvider<AnnuaireNotifier, AnnuaireState>(
 
 final messageProvider =
     StateNotifierProvider.autoDispose<MessageNotifier, MessageState>(
-        (ref) => MessageNotifier(MessageRepo()));
+        (ref) => MessageNotifier(ref.watch(messageRepositoryProvider)));
 
 final conversationStateProvider =
     StateNotifierProvider.autoDispose<ConversationNotifier, ConversationState>(
-        (ref) => ConversationNotifier(MessageRepo()));
+        (ref) => ConversationNotifier(ref.watch(messageRepositoryProvider)));
