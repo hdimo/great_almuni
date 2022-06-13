@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greatalmuni/providers.dart';
 import 'package:greatalmuni/ui/annuaire/annuaire_home_page.dart';
 import 'package:greatalmuni/ui/forum/forum_home_page.dart';
+import 'package:greatalmuni/ui/forum/new_discution_page.dart';
 import 'package:greatalmuni/ui/forum/widget/forum_drawer.dart';
 import 'package:greatalmuni/ui/messagerie/messagerie_home_page.dart';
 
@@ -31,7 +32,14 @@ class _MainPageState extends ConsumerState<MainPage> {
         title: Text(_title),
         actions: [
           if (_selectedIndex == 1)
-            ElevatedButton(onPressed: () {}, child: const Text('Ecrire')),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const NewDiscutionPage()),
+                );
+              },
+              child: const Text('Ecrire'),
+            ),
           IconButton(
               onPressed: () {
                 // user state notifier to loggout user
@@ -40,7 +48,7 @@ class _MainPageState extends ConsumerState<MainPage> {
               icon: const Icon(Icons.logout))
         ],
       ),
-      drawer: _selectedIndex == 1 ? ForumDrawer() : null,
+      drawer: _selectedIndex == 1 ? const ForumDrawer() : null,
       body: _pages.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onTap,

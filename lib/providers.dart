@@ -3,6 +3,8 @@ import 'package:greatalmuni/application/annuaire/annuaire_notifier.dart';
 import 'package:greatalmuni/application/annuaire/annuaire_state.dart';
 import 'package:greatalmuni/application/auth/auth_notifier.dart';
 import 'package:greatalmuni/application/auth/auth_state.dart';
+import 'package:greatalmuni/application/forum/discution_notifier.dart';
+import 'package:greatalmuni/application/forum/discution_state.dart';
 import 'package:greatalmuni/application/messagerie/message_notifier.dart';
 import 'package:greatalmuni/application/messagerie/message_state.dart';
 import 'package:greatalmuni/application/user/user_notifier.dart';
@@ -45,3 +47,8 @@ final messageProvider =
 final conversationStateProvider =
     StateNotifierProvider.autoDispose<ConversationNotifier, ConversationState>(
         (ref) => ConversationNotifier(ref.watch(messageRepositoryProvider)));
+
+final discutionStateProvider =
+    StateNotifierProvider.autoDispose<DiscutionNotifier, DiscutionState>((ref) {
+  return DiscutionNotifier(ref.watch(messageRepositoryProvider));
+});

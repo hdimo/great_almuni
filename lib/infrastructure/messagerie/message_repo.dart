@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:greatalmuni/domain/conversation.dart';
+import 'package:greatalmuni/domain/discution.dart';
 import 'package:greatalmuni/domain/message.dart';
 import 'package:greatalmuni/domain/user.dart';
 
@@ -107,6 +108,19 @@ class MessageRepo {
         .collection('conversation')
         .doc(conversationid)
         .collection('messages')
+        .orderBy('createdOn')
+        .snapshots();
+  }
+
+  addNewDiscution(Discution discution) async {
+    await FirebaseFirestore.instance
+        .collection('discution')
+        .add(discution.toJson());
+  }
+
+  getDiscutions() {
+    return FirebaseFirestore.instance
+        .collection('discution')
         .orderBy('createdOn')
         .snapshots();
   }
