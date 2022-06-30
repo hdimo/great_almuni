@@ -14,7 +14,7 @@ class NewDiscutionPage extends ConsumerStatefulWidget {
 class _DiscutionPageState extends ConsumerState<NewDiscutionPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final categories = ['informatique', 'chimie'];
+  final categories = ['Emploi','Stage','Jurique', 'Divers'];
 
   TextEditingController? subjetController;
   TextEditingController? contentController;
