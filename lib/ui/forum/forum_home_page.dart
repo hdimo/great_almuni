@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greatalmuni/domain/discution.dart';
 import 'package:greatalmuni/providers.dart';
+import 'package:greatalmuni/ui/forum/disuction_page.dart';
 import 'package:intl/intl.dart';
 
 class ForumHomePage extends ConsumerStatefulWidget {
@@ -34,9 +35,19 @@ class _ForumHomePageState extends ConsumerState<ForumHomePage> {
               .map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
+                data['uid'] = document.reference.id;
                 var message = Discution.fromJson(data);
                 return ListTile(
-                  title: Text(message.content),
+                  onTap: () {
+                    final discution = Discution.fromJson(data);
+                    print(discution);
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return DiscutionPage(discution);
+                      },
+                    ));
+                  },
+                  title: Text(message.title),
                   subtitle: Text(message.category +
                       ' le ' +
                       DateFormat('MM/d à kk:mm').format(message.createdOn)),

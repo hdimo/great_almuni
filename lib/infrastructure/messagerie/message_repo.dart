@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:greatalmuni/domain/comment.dart';
 import 'package:greatalmuni/domain/conversation.dart';
 import 'package:greatalmuni/domain/discution.dart';
 import 'package:greatalmuni/domain/message.dart';
@@ -122,6 +123,33 @@ class MessageRepo {
     return FirebaseFirestore.instance
         .collection('discution')
         .orderBy('createdOn')
+        .snapshots();
+  }
+
+  getDiscution(String discutionID) {
+    Discution? discution;
+    return FirebaseFirestore.instance
+        .collection('discution')
+        .doc(discutionID)
+        .get()
+        .then((doc) => discution = Discution.fromJson(doc.data()!));
+    ;
+  }
+
+  void addCommentToDiscution(String discutionId, Comment comment) async {
+    final dt = comment.toJson();
+    await FirebaseFirestore.instance
+        .collection('discution')
+        .doc(discutionId)
+        .collection('comments')
+        .add(comment.toJson());
+  }
+
+  getCommentsForDiscution(String discutionId) {
+    return FirebaseFirestore.instance
+        .collection('discution')
+        .doc(discutionId)
+        .collection('comments')
         .snapshots();
   }
 }

@@ -20,10 +20,12 @@ Discution _$DiscutionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Discution {
+  String? get uid => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  List<Comment>? get comments => throw _privateConstructorUsedError;
   DateTime get createdOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,10 +39,12 @@ abstract class $DiscutionCopyWith<$Res> {
   factory $DiscutionCopyWith(Discution value, $Res Function(Discution) then) =
       _$DiscutionCopyWithImpl<$Res>;
   $Res call(
-      {String title,
+      {String? uid,
+      String title,
       String category,
       String content,
       String userId,
+      List<Comment>? comments,
       DateTime createdOn});
 }
 
@@ -54,13 +58,19 @@ class _$DiscutionCopyWithImpl<$Res> implements $DiscutionCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? uid = freezed,
     Object? title = freezed,
     Object? category = freezed,
     Object? content = freezed,
     Object? userId = freezed,
+    Object? comments = freezed,
     Object? createdOn = freezed,
   }) {
     return _then(_value.copyWith(
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -77,6 +87,10 @@ class _$DiscutionCopyWithImpl<$Res> implements $DiscutionCopyWith<$Res> {
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      comments: comments == freezed
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>?,
       createdOn: createdOn == freezed
           ? _value.createdOn
           : createdOn // ignore: cast_nullable_to_non_nullable
@@ -92,10 +106,12 @@ abstract class _$$_DiscutionCopyWith<$Res> implements $DiscutionCopyWith<$Res> {
       __$$_DiscutionCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String title,
+      {String? uid,
+      String title,
       String category,
       String content,
       String userId,
+      List<Comment>? comments,
       DateTime createdOn});
 }
 
@@ -111,13 +127,19 @@ class __$$_DiscutionCopyWithImpl<$Res> extends _$DiscutionCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? uid = freezed,
     Object? title = freezed,
     Object? category = freezed,
     Object? content = freezed,
     Object? userId = freezed,
+    Object? comments = freezed,
     Object? createdOn = freezed,
   }) {
     return _then(_$_Discution(
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -134,6 +156,10 @@ class __$$_DiscutionCopyWithImpl<$Res> extends _$DiscutionCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      comments: comments == freezed
+          ? _value._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>?,
       createdOn: createdOn == freezed
           ? _value.createdOn
           : createdOn // ignore: cast_nullable_to_non_nullable
@@ -146,15 +172,20 @@ class __$$_DiscutionCopyWithImpl<$Res> extends _$DiscutionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Discution implements _Discution {
   const _$_Discution(
-      {required this.title,
+      {this.uid,
+      required this.title,
       required this.category,
       required this.content,
       required this.userId,
-      required this.createdOn});
+      final List<Comment>? comments,
+      required this.createdOn})
+      : _comments = comments;
 
   factory _$_Discution.fromJson(Map<String, dynamic> json) =>
       _$$_DiscutionFromJson(json);
 
+  @override
+  final String? uid;
   @override
   final String title;
   @override
@@ -163,12 +194,21 @@ class _$_Discution implements _Discution {
   final String content;
   @override
   final String userId;
+  final List<Comment>? _comments;
+  @override
+  List<Comment>? get comments {
+    final value = _comments;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final DateTime createdOn;
 
   @override
   String toString() {
-    return 'Discution(title: $title, category: $category, content: $content, userId: $userId, createdOn: $createdOn)';
+    return 'Discution(uid: $uid, title: $title, category: $category, content: $content, userId: $userId, comments: $comments, createdOn: $createdOn)';
   }
 
   @override
@@ -176,10 +216,12 @@ class _$_Discution implements _Discution {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Discution &&
+            const DeepCollectionEquality().equals(other.uid, uid) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.category, category) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other._comments, _comments) &&
             const DeepCollectionEquality().equals(other.createdOn, createdOn));
   }
 
@@ -187,10 +229,12 @@ class _$_Discution implements _Discution {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(uid),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(category),
       const DeepCollectionEquality().hash(content),
       const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(_comments),
       const DeepCollectionEquality().hash(createdOn));
 
   @JsonKey(ignore: true)
@@ -206,15 +250,19 @@ class _$_Discution implements _Discution {
 
 abstract class _Discution implements Discution {
   const factory _Discution(
-      {required final String title,
+      {final String? uid,
+      required final String title,
       required final String category,
       required final String content,
       required final String userId,
+      final List<Comment>? comments,
       required final DateTime createdOn}) = _$_Discution;
 
   factory _Discution.fromJson(Map<String, dynamic> json) =
       _$_Discution.fromJson;
 
+  @override
+  String? get uid => throw _privateConstructorUsedError;
   @override
   String get title => throw _privateConstructorUsedError;
   @override
@@ -223,6 +271,8 @@ abstract class _Discution implements Discution {
   String get content => throw _privateConstructorUsedError;
   @override
   String get userId => throw _privateConstructorUsedError;
+  @override
+  List<Comment>? get comments => throw _privateConstructorUsedError;
   @override
   DateTime get createdOn => throw _privateConstructorUsedError;
   @override

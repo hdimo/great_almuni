@@ -8,6 +8,8 @@ import 'package:greatalmuni/application/forum/discution_state.dart';
 import 'package:greatalmuni/application/messagerie/message_notifier.dart';
 import 'package:greatalmuni/application/messagerie/message_state.dart';
 import 'package:greatalmuni/application/user/user_notifier.dart';
+import 'package:greatalmuni/application/forum/comment_notifier.dart';
+import 'package:greatalmuni/application/forum/comment_state.dart';
 import 'package:greatalmuni/application/user/user_state.dart';
 import 'package:greatalmuni/infrastructure/img_uploader.dart';
 import 'package:greatalmuni/infrastructure/messagerie/message_repo.dart';
@@ -51,4 +53,9 @@ final conversationStateProvider =
 final discutionStateProvider =
     StateNotifierProvider.autoDispose<DiscutionNotifier, DiscutionState>((ref) {
   return DiscutionNotifier(ref.watch(messageRepositoryProvider));
+});
+
+final commentStateProvider =
+    StateNotifierProvider.autoDispose<CommentNotifier, CommentState>((ref) {
+  return CommentNotifier(ref.watch(messageRepositoryProvider));
 });
